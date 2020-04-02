@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jason.mapper.demo.StudentMapper">
+    <resultMap id="result" type="Student">
+        <association property="classes" column="cId"
+                     select="com.jason.mapper.demo.ClassesMapper.selectById"/>
+    </resultMap>
+    <sql id="studentColumns">
+        s.id as "id",
+        s.name as "name",
+        s.c_id as "cId"
+    </sql>
+
+    <select id="selectAll">
+        select
+        <include refid="studentColumns"/>
+        from student s
+    </select>
+
+    <select id="select" resultType="Student">
+        select
+        <include refid="studentColumns"/>
+        from student s
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name like
+                <if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+                <if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+                <if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+            </if>
+            <if test="cId != null and cId != ''">
+                and c_id like
+                <if test="dbName == 'oracle'">'%'||#{cId}||'%'</if>
+                <if test="dbName == 'mssql'">'%'+#{cId}+'%'</if>
+                <if test="dbName == 'mysql'">concat('%',#{cId},'%')</if>
+            </if>
+            <if test="parent.test != null and parent.test != ''">
+                and id = 10
+            </if>
+        </where>
+    </select>
+
+    <select id="selectById" resultMap="result">
+        select
+        <include refid="studentColumns"/>
+        from student s
+        where id = #{id}
+    </select>
+
+    <select id="selectByClassesId" resultMap="result">
+        select
+        <include refid="studentColumns"/>
+        from student s
+        where c_id = #{cId}
+    </select>
+</mapper>
