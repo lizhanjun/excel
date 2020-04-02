@@ -90,7 +90,7 @@ public class Demo {
         //配置转换模板格式
         export.setTemplate(ExcelConfig.getTemplateTitle());
         export.outPutData(useAnnoList);
-        export.writeToFile("C:/Users/马昊/Desktop/exportUseAnno.xlsx");
+        export.writeToFile("C:/Users/user/Desktop/exportUseAnno.xlsx");
 
 
         /*
@@ -108,7 +108,7 @@ public class Demo {
                 System.out.println("第"+i+"行数据导出失败："+e.getMessage());
             }
         }
-        export.writeToFile("C:/Users/马昊/Desktop/exportUseAnno.xlsx");
+        export.writeToFile("C:/Users/user/Desktop/exportUseAnno.xlsx");
         */
     }
 
@@ -121,7 +121,7 @@ public class Demo {
         export.setTemplate(ExcelConfig.getTemplateTitle());
         //不使用注解时，需传入标题行
         export.outPutData(noUseAnnoList,headRow);
-        export.writeToFile("C:/Users/马昊/Desktop/exportNoUseAnno.xlsx");
+        export.writeToFile("C:/Users/user/Desktop/exportNoUseAnno.xlsx");
 
 
         /*
@@ -139,7 +139,7 @@ public class Demo {
                 System.out.println("第"+i+"行数据导出失败："+e.getMessage());
             }
         }
-        export.writeToFile("C:/Users/马昊/Desktop/exportNoUseAnno.xlsx");
+        export.writeToFile("C:/Users/user/Desktop/exportNoUseAnno.xlsx");
         */
     }
 
@@ -147,7 +147,7 @@ public class Demo {
     //使用注解导入
     //支持模板格式
     public void importUseAnno() throws NoSuchMethodException, ParseException, InstantiationException, IOException, IllegalAccessException, InvocationTargetException, NoSuchFieldException {
-        File file = new File("C:/Users/马昊/Desktop/exportUseAnno.xlsx");
+        File file = new File("C:/Users/user/Desktop/exportUseAnno.xlsx");
         ExcelImport<ImportUseAnno> excelImport = new ExcelImport<>(new FileInputStream(file), ImportUseAnno.class);
         //设置模板格式
         excelImport.setTemplate(ExcelConfig.getTemplateCode());
@@ -182,7 +182,7 @@ public class Demo {
     //不使用注解导入只能取出与实体类字段名称一样的列
     //不支持模板格式
     public void importNoUseAnno() throws IOException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchFieldException, ParseException {
-        File file = new File("C:/Users/马昊/Desktop/exportUseAnno.xlsx");
+        File file = new File("C:/Users/user/Desktop/exportUseAnno.xlsx");
 
         ExcelImport<ImportNoUseAnno> excelImport = new ExcelImport<>(new FileInputStream(file), ImportNoUseAnno.class);
         List<ImportNoUseAnno> list = new ArrayList<>();
